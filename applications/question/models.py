@@ -23,3 +23,15 @@ class Question(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Answer(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='answer')
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answer')
+    solution = models.TextField()
+    image = models.ImageField(upload_to='', blank=True)
+    public_date = models.DateField(auto_now_add=True)
+
+
+    def __str__(self):
+        return self.question.title
